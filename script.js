@@ -1,4 +1,4 @@
-require('dotenv').config()
+require("dotenv").config()
 
 const express = require("express")
 const mysql = require("mysql")
@@ -6,8 +6,7 @@ const app = express()
 const portNumber = 1337
 const cors = require("cors")
 const keys = require("./listOfKeys")
-
-
+// full list of the object keys
 
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -32,14 +31,15 @@ app.get("/", (req, res) => res.send("Welcome to Paolo's node & express app!"))
 
 app.get("/api/censusDB", function(req, resp) {
   const currentSelection = req.query.key
-  // put in if part about having to put query in
+  // This is how/what the API queries from the database. It takes the query and key= from the URL submitted to this backend.
+
   connection.query(
     `SELECT ${currentSelection} AS Variable, COUNT(${currentSelection}) AS Count, CAST(AVG (age) AS DECIMAL (10,2)) AS Average_Age FROM census_learn_sql GROUP BY ${currentSelection} ORDER BY COUNT(${currentSelection}) DESC LIMIT 100`,
     function(error, rows, fields) {
       if (!!error) {
         console.log("Error in the query")
       } else {
-        console.log("Query successful"+Math.random())
+        console.log("Query successful" + Math.random())
         resp.send(rows)
       }
     }
@@ -50,7 +50,4 @@ app.listen(portNumber, () => {
   console.log(`listening on port: ${portNumber}`)
 })
 
-// example queries
-// "SELECT * FROM census_learn_sql WHERE age = 28"
-// "SELECT Education AS Variable, COUNT(education) AS Count, CAST(AVG (age) AS DECIMAL (12,2)) AS Average_Age FROM census_learn_sql GROUP BY education ORDER BY COUNT(education) DESC LIMIT 100"
-// numbers that work are 4,10,40
+// an example query for education would be: http://localhost:1337/api/censusDB?key=education
