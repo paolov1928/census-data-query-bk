@@ -11,7 +11,7 @@ DB_PASS,
 DB_DATABASE,
 DB_SSL)
 - nodemon script
-  (- send queries from the front-end application)
+
 
 Purpose
 
