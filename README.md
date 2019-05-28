@@ -4,6 +4,7 @@ To run:
 
 - npm install
 - nodemon script
+  (- send queries from the front-end application)
 
 Purpose
 
