@@ -2,7 +2,14 @@
 
 To run:
 
+- clone github repo
 - npm install
+- create a .env file with the RDS connection data
+(DB_HOST,
+DB_USER,
+DB_PASS,
+DB_DATABASE,
+DB_SSL)
 - nodemon script
   (- send queries from the front-end application)
 
